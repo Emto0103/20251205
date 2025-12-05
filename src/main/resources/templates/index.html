@@ -25,17 +25,17 @@
             <a href="#">WHAT'S NEW</a>
         </nav>
         <div class="user-menu">
-            <div sec:authorize="isAuthenticated()">
+            <div sec:authorize="isAuthenticated()" style="display: flex; align-items: center; gap: 10px;">
                 <span sec:authentication="name"></span>님
                 <a th:href="@{/logout}" class="btn-logout">로그아웃</a>
             </div>
-            <div sec:authorize="isAnonymous()">
+            <div sec:authorize="isAnonymous()" style="display: flex; align-items: center; gap: 10px;">
                 <a th:href="@{/login}" class="btn-login">Sign In</a>
                 <a th:href="@{/signup}" class="btn-signup">회원가입</a>
             </div>
-            <a href="#">My Starbucks</a>
-            <a href="#">Customer Service & Ideas</a>
-            <a href="#">Find a Store</a>
+            <a href="#" style="font-size: 11px;">My Starbucks</a>
+            <a href="#" style="font-size: 11px;">Customer Service & Ideas</a>
+            <a href="#" style="font-size: 11px;">Find a Store</a>
         </div>
     </div>
 </header>
@@ -48,17 +48,23 @@
     </div>
     <div class="product-showcase">
         <div class="product-item">
-            <img src="/images/drink1.png" alt="Starbucks Classic Milk Tea Blended" onerror="this.style.display='none'">
+            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000002487]_20210415133521947.jpg"
+                 alt="Starbucks Classic Milk Tea Blended"
+                 onerror="this.src='/images/drink1.png'">
             <h3>STARBUCKS® CLASSIC<br>MILK TEA BLENDED</h3>
             <p>스타벅스 클래식 밀크 티 블렌디드</p>
         </div>
         <div class="product-item center">
-            <img src="/images/drink2.png" alt="Sea Salt Caramel Cold Brew" onerror="this.style.display='none'">
+            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9200000003276]_20210426091745866.jpg"
+                 alt="Sea Salt Caramel Cold Brew"
+                 onerror="this.src='/images/drink2.png'">
             <h3>SEA SALT CARAMEL<br>COLD BREW</h3>
             <p>씨솔트 카라멜 콜드 브루</p>
         </div>
         <div class="product-item">
-            <img src="/images/drink3.png" alt="Double Lemon Blended" onerror="this.style.display='none'">
+            <img src="https://image.istarbucks.co.kr/upload/store/skuimg/2023/07/[9200000004602]_20230703100447093.jpg"
+                 alt="Double Lemon Blended"
+                 onerror="this.src='/images/drink3.png'">
             <h3>DOUBLE LEMON<br>BLENDED</h3>
             <p>더블 레몬 블렌디드</p>
         </div>
