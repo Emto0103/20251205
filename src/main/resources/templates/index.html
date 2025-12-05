@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Korea</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<!-- 헤더 -->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="/images/logo.png" alt="Starbucks" onerror="this.style.display='none'">
+            <span>STARBUCKS</span>
+        </div>
+        <nav class="main-nav">
+            <a th:href="@{/coffee}">COFFEE</a>
+            <a href="#">MENU</a>
+            <a href="#">STORE</a>
+            <a href="#">RESPONSIBILITY</a>
+            <a href="#">STARBUCKS REWARDS</a>
+            <a href="#">CORPORATE SALES</a>
+            <a href="#">WHAT'S NEW</a>
+        </nav>
+        <div class="user-menu">
+            <div sec:authorize="isAuthenticated()">
+                <span sec:authentication="name"></span>님
+                <a th:href="@{/logout}" class="btn-logout">로그아웃</a>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <a th:href="@{/login}" class="btn-login">Sign In</a>
+                <a th:href="@{/signup}" class="btn-signup">회원가입</a>
+            </div>
+            <a href="#">My Starbucks</a>
+            <a href="#">Customer Service & Ideas</a>
+            <a href="#">Find a Store</a>
+        </div>
+    </div>
+</header>
+
+<!-- 메인 배너 -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">LIGHT UP</h1>
+        <h2 class="hero-subtitle">YOUR SUMMER</h2>
+    </div>
+    <div class="product-showcase">
+        <div class="product-item">
+            <img src="/images/drink1.png" alt="Starbucks Classic Milk Tea Blended" onerror="this.style.display='none'">
+            <h3>STARBUCKS® CLASSIC<br>MILK TEA BLENDED</h3>
+            <p>스타벅스 클래식 밀크 티 블렌디드</p>
+        </div>
+        <div class="product-item center">
+            <img src="/images/drink2.png" alt="Sea Salt Caramel Cold Brew" onerror="this.style.display='none'">
+            <h3>SEA SALT CARAMEL<br>COLD BREW</h3>
+            <p>씨솔트 카라멜 콜드 브루</p>
+        </div>
+        <div class="product-item">
+            <img src="/images/drink3.png" alt="Double Lemon Blended" onerror="this.style.display='none'">
+            <h3>DOUBLE LEMON<br>BLENDED</h3>
+            <p>더블 레몬 블렌디드</p>
+        </div>
+    </div>
+</section>
+
+<!-- 공지사항 -->
+<section class="notice-section">
+    <div class="notice-item">
+        <h3>공지사항</h3>
+        <p>시스템 개선 및 서비스 점검 안내</p>
+    </div>
+    <div class="notice-item">
+        <h3>스타벅스 프로모션</h3>
+        <p>새로워진 스타벅스 앱나이트 이용안내 ★★</p>
+    </div>
+</section>
+
+<!-- 리워드 섹션 -->
+<section class="rewards-section">
+    <div class="container">
+        <div class="rewards-logo">
+            <img src="/images/rewards-logo.png" alt="Starbucks Rewards" onerror="this.style.display='none'">
+            <h2>STARBUCKS REWARDS</h2>
+        </div>
+        <div class="rewards-content">
+            <h3>스타벅스만의 특별한 혜택, 스타벅스 리워드</h3>
+            <p>스타벅스 회원이세요? <strong>로그인</strong>을 통해 나만의 리워드를 확인해보세요.</p>
+            <p>스타벅스 회원이 아니세요? <strong>가입</strong>을 통해 리워드 혜택을 즐기세요.</p>
+            <div class="rewards-buttons">
+                <a th:href="@{/signup}" class="btn-primary">회원가입</a>
+                <a th:href="@{/login}" class="btn-secondary">로그인</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 푸터 -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>COMPANY</h4>
+                <ul>
+                    <li><a href="#">한눈에 보기</a></li>
+                    <li><a href="#">스타벅스 사명</a></li>
+                    <li><a href="#">스타벅스 소개</a></li>
+                    <li><a href="#">컴플라이언스</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>CORPORATE SALES</h4>
+                <ul>
+                    <li><a href="#">단체 및 기업 구매 안내</a></li>
+                    <li><a href="#">단체 주문 배달 안내</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>PARTNERSHIP</h4>
+                <ul>
+                    <li><a href="#">신규 입점 제의</a></li>
+                    <li><a href="#">협력 고객사 등록신청</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>ONLINE COMMUNITY</h4>
+                <ul>
+                    <li><a href="#">페이스북</a></li>
+                    <li><a href="#">트위터</a></li>
+                    <li><a href="#">유튜브</a></li>
+                    <li><a href="#">인스타그램</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>RECRUIT</h4>
+                <ul>
+                    <li><a href="#">채용 소개</a></li>
+                    <li><a href="#">채용 지원하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Starbucks Coffee Company. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

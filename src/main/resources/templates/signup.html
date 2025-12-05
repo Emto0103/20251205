@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 - Starbucks Korea</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+            background: #f7f7f7;
+        }
+
+        /* 헤더 */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00704a;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00704a;
+        }
+
+        /* 메인 컨테이너 */
+        .signup-container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px 60px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .signup-title {
+            font-size: 36px;
+            color: #00704a;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .signup-subtitle {
+            color: #777;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* 알림 메시지 */
+        .alert {
+            padding: 18px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .alert-error {
+            background: #fff5f5;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+        }
+
+        .alert-error p {
+            margin: 0;
+        }
+
+        /* 폼 스타일 */
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .required {
+            color: #e53e3e;
+            margin-left: 3px;
+        }
+
+        .form-input {
+            padding: 16px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #00704a;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 112, 74, 0.1);
+        }
+
+        .form-input.error {
+            border-color: #fc8181;
+            background: #fff5f5;
+        }
+
+        .form-input::placeholder {
+            color: #a0aec0;
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: #718096;
+            margin-top: -5px;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: -5px;
+        }
+
+        /* 약관 동의 */
+        .terms-section {
+            margin-top: 10px;
+        }
+
+        .terms-box {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .terms-header {
+            background: linear-gradient(135deg, #00704a 0%, #005a3c 100%);
+            color: white;
+            padding: 18px 25px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .terms-content {
+            padding: 25px;
+            max-height: 250px;
+            overflow-y: auto;
+            background: #fafafa;
+            line-height: 1.8;
+            font-size: 14px;
+            color: #4a5568;
+        }
+
+        .terms-content h4 {
+            color: #2d3748;
+            margin: 20px 0 10px 0;
+            font-size: 15px;
+        }
+
+        .terms-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .terms-content p {
+            margin-bottom: 12px;
+        }
+
+        .terms-content ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+
+        .terms-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .terms-content::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        .terms-content::-webkit-scrollbar-thumb {
+            background: #00704a;
+            border-radius: 10px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-group:hover {
+            background: #edf2f7;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #00704a;
+        }
+
+        .checkbox-group label {
+            font-size: 14px;
+            color: #2d3748;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        /* 버튼 */
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00704a 0%, #005a3c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 112, 74, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 112, 74, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+        /* 푸터 */
+        .footer {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 50px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h4 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #00704a;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px 0;
+            border-top: 1px solid #4a5568;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .signup-container {
+                margin: 30px 20px;
+                padding: 35px 25px;
+            }
+
+            .signup-title {
+                font-size: 28px;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* 애니메이션 */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signup-container {
+            animation: slideUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+<!-- 헤더 -->
+<header class="header">
+    <div class="header-content">
+        <a href="/" class="logo" th:href="@{/}">STARBUCKS</a>
+        <nav class="nav-links">
+            <a th:href="@{/coffee}">COFFEE</a>
+            <a href="#">MENU</a>
+            <a href="#">STORE</a>
+            <a th:href="@{/login}">로그인</a>
+        </nav>
+    </div>
+</header>
+
+<!-- 회원가입 컨테이너 -->
+<div class="signup-container">
+    <!-- 헤더 -->
+    <div class="signup-header">
+        <h1 class="signup-title">회원가입</h1>
+        <p class="signup-subtitle">
+            스타벅스 리워드 회원이 되어<br>
+            다양한 혜택과 이벤트를 경험하세요
+        </p>
+    </div>
+
+    <!-- 전체 에러 메시지 -->
+    <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-error">
+        <p th:each="error : ${#fields.globalErrors()}" th:text="${error}"></p>
+    </div>
+
+    <!-- 회원가입 폼 -->
+    <form th:action="@{/signup}"
+          th:object="${signUpRequest}"
+          method="post"
+          class="signup-form">
+
+        <!-- 아이디 -->
+        <div class="form-group">
+            <label for="username" class="form-label">
+                아이디<span class="required">*</span>
+            </label>
+            <input type="text"
+                   id="username"
+                   th:field="*{username}"
+                   class="form-input"
+                   th:classappend="${#fields.hasErrors('username')} ? 'error' : ''"
+                   placeholder="영문, 숫자 4-20자">
+            <span class="help-text">※ 영문자와 숫자를 조합하여 4-20자로 입력해주세요</span>
+            <span class="error-message"
+                  th:if="${#fields.hasErrors('username')}"
+                  th:errors="*{username}"></span>
+        </div>
+
+        <!-- 비밀번호 -->
+        <div class="form-group">
+            <label for="password" class="form-label">
+                비밀번호<span class="required">*</span>
+            </label>
+            <input type="password"
+                   id="password"
+                   th:field="*{password}"
+                   class="form-input"
+                   th:classappend="${#fields.hasErrors('password')} ? 'error' : ''"
+                   placeholder="8자 이상 입력">
+            <span class="help-text">※ 영문, 숫자를 포함하여 8자 이상 입력해주세요</span>
+            <span class="error-message"
+                  th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}"></span>
+        </div>
+
+        <!-- 비밀번호 확인 -->
+        <div class="form-group">
+            <label for="confirmPassword" class="form-label">
+                비밀번호 확인<span class="required">*</span>
+            </label>
+            <input type="password"
+                   id="confirmPassword"
+                   th:field="*{confirmPassword}"
+                   class="form-input"
+                   th:classappend="${#fields.hasErrors('confirmPassword')} ? 'error' : ''"
+                   placeholder="비밀번호를 다시 입력해주세요">
+            <span class="error-message"
+                  th:if="${#fields.hasErrors('confirmPassword')}"
+                  th:errors="*{confirmPassword}"></span>
+        </div>
+
+        <!-- 이메일 -->
+        <div class="form-group">
+            <label for="email" class="form-label">
+                이메일<span class="required">*</span>
+            </label>
+            <input type="email"
+                   id="email"
+                   th:field="*{email}"
+                   class="form-input"
+                   th:classappend="${#fields.hasErrors('email')} ? 'error' : ''"
+                   placeholder="example@email.com">
+            <span class="error-message"
+                  th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}"></span>
+        </div>
+
+        <!-- 이름 -->
+        <div class="form-group">
+            <label for="name" class="form-label">
+                이름<span class="required">*</span>
+            </label>
+            <input type="text"
+                   id="name"
+                   th:field="*{name}"
+                   class="form-input"
+                   th:classappend="${#fields.hasErrors('name')} ? 'error' : ''"
+                   placeholder="이름을 입력해주세요">
+            <span class="error-message"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}"></span>
+        </div>
+
+        <!-- 휴대폰 -->
+        <div class="form-group">
+            <label for="phone" class="form-label">휴대폰 번호</label>
+            <input type="tel"
+                   id="phone"
+                   th:field="*{phone}"
+                   class="form-input"
+                   th:classappend="${#fields.hasErrors('phone')} ? 'error' : ''"
+                   placeholder="010-1234-5678">
+            <span class="help-text">※ 하이픈(-)을 포함하여 입력해주세요</span>
+            <span class="error-message"
+                  th:if="${#fields.hasErrors('phone')}"
+                  th:errors="*{phone}"></span>
+        </div>
+
+        <!-- 약관 동의 -->
+        <div class="terms-section">
+            <div class="terms-box">
+                <div class="terms-header">
+                    이용약관 및 개인정보 처리방침
+                </div>
+                <div class="terms-content">
+                    <h4>제1조 (목적)</h4>
+                    <p>본 약관은 스타벅스커피 코리아 유한회사가 제공하는 온라인 서비스의 이용과 관련하여 회사와 회원 간의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+
+                    <h4>제2조 (정의)</h4>
+                    <p>① "회원"이란 회사가 정한 절차에 따라 회원가입을 하고 서비스를 이용하는 자를 말합니다.</p>
+                    <p>② "아이디(ID)"란 회원의 식별과 서비스 이용을 위하여 회원이 설정하고 회사가 승인한 문자와 숫자의 조합을 말합니다.</p>
+                    <p>③ "비밀번호"란 회원이 부여받은 아이디와 일치된 회원임을 확인하고 회원의 비밀보호를 위해 회원 자신이 설정한 문자와 숫자의 조합을 말합니다.</p>
+
+                    <h4>개인정보 수집 및 이용</h4>
+                    <p>회사는 서비스 제공을 위해 다음과 같은 개인정보를 수집합니다:</p>
+                    <ul>
+                        <li>필수항목: 아이디, 비밀번호, 이메일, 이름</li>
+                        <li>선택항목: 휴대폰 번호</li>
+                    </ul>
+                    <p>수집된 개인정보는 회원관리, 서비스 제공, 고객 상담 등의 목적으로 사용됩니다.</p>
+
+                    <h4>개인정보의 보유 및 이용기간</h4>
+                    <p>회사는 회원 탈퇴 시까지 개인정보를 보유하며, 관계 법령에 따라 보존할 필요가 있는 경우 해당 기간 동안 보관합니다.</p>
+                </div>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox"
+                       id="agreeTerms"
+                       th:field="*{agreeTerms}">
+                <label for="agreeTerms">
+                    위 이용약관 및 개인정보 수집·이용에 동의합니다<span class="required">*</span>
+                </label>
+            </div>
+            <span class="error-message"
+                  th:if="${#fields.hasErrors('agreeTerms')}"
+                  th:errors="*{agreeTerms}"></span>
+        </div>
+
+        <!-- 버튼 -->
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">회원가입</button>
+            <a th:href="@{/}" class="btn btn-secondary">취소</a>
+        </div>
+    </form>
+</div>
+
+<!-- 푸터 -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-column">
+            <h4>COMPANY</h4>
+            <ul>
+                <li><a href="#">한눈에 보기</a></li>
+                <li><a href="#">스타벅스 사명</a></li>
+                <li><a href="#">스타벅스 소개</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>CORPORATE SALES</h4>
+            <ul>
+                <li><a href="#">단체 및 기업 구매 안내</a></li>
+                <li><a href="#">단체 주문 배달 안내</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>ONLINE COMMUNITY</h4>
+            <ul>
+                <li><a href="#">페이스북</a></li>
+                <li><a href="#">인스타그램</a></li>
+                <li><a href="#">유튜브</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>RECRUIT</h4>
+            <ul>
+                <li><a href="#">채용 소개</a></li>
+                <li><a href="#">채용 지원하기</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Starbucks Coffee Company. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

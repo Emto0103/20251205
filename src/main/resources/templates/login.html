@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>로그인 - Starbucks Korea</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="login-page">
+<!-- 헤더 -->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <a th:href="@{/}">
+                <span class="logo-text">STARBUCKS</span>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <a th:href="@{/coffee}">COFFEE</a>
+            <a href="#">MENU</a>
+            <a href="#">STORE</a>
+            <a href="#">RESPONSIBILITY</a>
+        </nav>
+        <div class="user-menu">
+            <a th:href="@{/login}">Sign In</a>
+            <a href="#">My Starbucks</a>
+            <a href="#">Customer Service & Ideas</a>
+            <a href="#">Find a Store</a>
+        </div>
+    </div>
+</header>
+
+<!-- 로그인 섹션 -->
+<section class="login-section">
+    <div class="login-container">
+        <div class="login-header">
+            <h2 class="login-title">로그인</h2>
+            <p class="login-subtitle">Welcome! 스타벅스 코리아에 오신 것을 환영합니다.</p>
+        </div>
+
+        <!-- 에러 메시지 -->
+        <div th:if="${param.error}" class="alert alert-error">
+            <p>아이디 또는 비밀번호가 올바르지 않습니다.</p>
+        </div>
+
+        <!-- 성공 메시지 -->
+        <div th:if="${message}" class="alert alert-success">
+            <p th:text="${message}">회원가입이 완료되었습니다.</p>
+        </div>
+
+        <!-- 로그인 폼 -->
+        <form th:action="@{/login}" method="post" class="login-form">
+            <div class="form-group">
+                <label for="username">아이디</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       class="form-input"
+                       placeholder="아이디를 입력해 주세요."
+                       required
+                       autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="form-input"
+                       placeholder="비밀번호를 입력해 주세요."
+                       required>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" id="remember-me" name="remember-me">
+                <label for="remember-me">아이디 저장</label>
+            </div>
+
+            <button type="submit" class="btn-login-submit">로그인</button>
+
+            <div class="login-info">
+                <p>※ 타 사이트의 비밀번호를 통상한 사용 시 도용의 위험이 있으므로 정기적인 비밀번호 변경을 해주시길 바랍니다.</p>
+                <p>※ 스타벅스 코리아의 공식 홈페이지는 Internet Explorer 9.0 이상, Chrome, Firefox, Safari 브라우저에 최적화 되어있습니다.</p>
+            </div>
+
+            <div class="login-links">
+                <a th:href="@{/signup}">회원가입</a>
+                <span class="divider">|</span>
+                <a href="#">아이디 찾기</a>
+                <span class="divider">|</span>
+                <a href="#">비밀번호 찾기</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- 푸터 -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>COMPANY</h4>
+                <ul>
+                    <li><a href="#">한눈에 보기</a></li>
+                    <li><a href="#">스타벅스 사명</a></li>
+                    <li><a href="#">스타벅스 소개</a></li>
+                    <li><a href="#">컴플라이언스</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>CORPORATE SALES</h4>
+                <ul>
+                    <li><a href="#">단체 및 기업 구매 안내</a></li>
+                    <li><a href="#">단체 주문 배달 안내</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>PARTNERSHIP</h4>
+                <ul>
+                    <li><a href="#">신규 입점 제의</a></li>
+                    <li><a href="#">협력 고객사 등록신청</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>ONLINE COMMUNITY</h4>
+                <ul>
+                    <li><a href="#">페이스북</a></li>
+                    <li><a href="#">트위터</a></li>
+                    <li><a href="#">유튜브</a></li>
+                    <li><a href="#">인스타그램</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>RECRUIT</h4>
+                <ul>
+                    <li><a href="#">채용 소개</a></li>
+                    <li><a href="#">채용 지원하기</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Starbucks Coffee Company. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
